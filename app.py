@@ -4,6 +4,6 @@ import urllib3, json, requests
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/price', methods=['GET'])
 def getPrice():
     return ' Hello from Yfarm'
