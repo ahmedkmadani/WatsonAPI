@@ -1,3 +1,4 @@
+#Price Model Predection using IBM Watson
 from flask import Flask, request, jsonify
 import urllib3, json, requests
 
@@ -18,6 +19,22 @@ mltoken = json.loads(response.text).get('token')
 
 header = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + mltoken}
 
-@app.route('/price', methods=['GET'])
+@app.route('/price', methods=['GET', 'POST'])
 def getPrice():
-    return ' Hello from Yfarm'
+    #getting month and year from POST request
+    month = request.args.get('month')
+    year = request.args.get('year')
+
+    payload_scoring = {"fields":["MONTH","YEAR"],"values":[[int(month),int(year)]]}
+    response_scoring = requests.post('https://eu-gb.ml.cloud.ibm.com/v3/wml_instances/6a216236-adcc-48b5-901f-41e4cafbf033/deployments/1d441776-58fb-4e22-8975-aa9b1c4a40a9/online', json=payload_scoring, headers=header)
+    print("Scoring response")
+    print(json.loads(response_scoring.text)) 
+    response = json.loads(response_scoring.text)
+
+    # #get result from the response 
+    month = str(response['values'][0][0])
+    year = str(response['values'][0][1])
+    pre_prams = str(response['values'][0][2])
+    price = str(response['values'][0][3])
+
+    return price
