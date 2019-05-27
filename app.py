@@ -19,7 +19,7 @@ mltoken = json.loads(response.text).get('token')
 
 header = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + mltoken}
 
-@app.route('/price', methods=['GET', 'POST'])
+@app.route('/price/v1', methods=['GET', 'POST'])
 def getPrice():
     #getting month and year from POST request
     month = request.args.get('month')
