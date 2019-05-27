@@ -37,7 +37,7 @@ def getPrice():
     pre_prams = str(response['values'][0][2])
     price = str(response['values'][0][3])
 
-    return price
+    return jsonify(month=month,year=year,pre_prams=pre_prams,price=price)
 
 
 
@@ -62,4 +62,4 @@ def getPriceV2():
     pre_prams = str(response['values'][0][2])
     price = str(response['values'][0][3])
 
-    return price
+    return jsonify(month=month,year=year,pre_prams=pre_prams,price=price)
