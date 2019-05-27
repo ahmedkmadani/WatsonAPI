@@ -41,23 +41,3 @@ def getPrice():
 
 
 
-@app.route('/price/v2', methods=['GET', 'POST'])
-def getPriceV2():
-    # #getting month and year from POST request
-    # # month = request.args.get('month')
-    # # year = request.args.get('year')
-
-    # payload_scoring = {"fields":["MONTH","YEAR","TEMP","Rainfall - (MM)"],"values":[[1,2000,28.353,12.676]]}
-
-    # response_scoring = requests.post('https://eu-gb.ml.cloud.ibm.com/v3/wml_instances/6a216236-adcc-48b5-901f-41e4cafbf033/deployments/dab8060f-b1f4-49d7-bd69-8ca833cc2d3d/online', json=payload_scoring, headers=header)
-    # print("Scoring response")
-    # print(json.loads(response_scoring.text))
-    # response = json.loads(response_scoring.text)
-
-    # #get result from the response 
-    # month = str(response['values'][0][0])
-    # year = str(response['values'][0][1])
-    # pre_prams = str(response['values'][0][2])
-    # price = str(response['values'][0][3])
-
-    return "Hello World"
