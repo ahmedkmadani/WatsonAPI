@@ -30,6 +30,7 @@ def getPrice():
     print("Scoring response")
     print(json.loads(response_scoring.text)) 
     response = json.loads(response_scoring.text)
+    response.headers.add('Access-Control-Allow-Origin', '*')
 
     # #get result from the response 
     month = str(response['values'][0][0])
