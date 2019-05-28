@@ -1,8 +1,10 @@
 #Price Model Predection using IBM Watson
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import urllib3, json, requests
 
 app = Flask(__name__)
+CORS(APP)
 
 #IBM Watson Credenials 
 wml_credentials={
