@@ -4,7 +4,7 @@ from flask_cors import CORS
 import urllib3, json, requests
 
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
 
 #IBM Watson Credenials 
 wml_credentials={
@@ -32,7 +32,6 @@ def getPrice():
     print("Scoring response")
     print(json.loads(response_scoring.text)) 
     response = json.loads(response_scoring.text)
-    response.headers.add('Access-Control-Allow-Origin', '*')
 
     # #get result from the response 
     month = str(response['values'][0][0])
