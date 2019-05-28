@@ -4,7 +4,7 @@ from flask_cors import CORS
 import urllib3, json, requests
 
 app = Flask(__name__)
-CORS(APP)
+CORS(app)
 
 #IBM Watson Credenials 
 wml_credentials={
