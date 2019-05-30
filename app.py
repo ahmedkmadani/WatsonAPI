@@ -1,7 +1,7 @@
 #Price Model Predection using IBM Watson
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import urllib3, json, requests
+import urllib3, json, requests, calendar
 
 app = Flask(__name__)
 CORS(app)
@@ -34,11 +34,11 @@ def getPrice():
     response = json.loads(response_scoring.text)
 
     # #get result from the response 
-    month = str(response['values'][0][0])
+    month = calendar.month_name[str(response['values'][0][0])]
     year = str(response['values'][0][1])
     pre_prams = str(response['values'][0][2])
     price_round = ("%.2f" % round(response['values'][0][3],2))
-    price = str(price_round +"GHS")
+    price = str(price_round + " GHS")
 
     return jsonify(month=month,year=year,pre_prams=pre_prams,price=price)
 
