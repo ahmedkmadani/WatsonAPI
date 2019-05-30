@@ -37,7 +37,8 @@ def getPrice():
     month = str(response['values'][0][0])
     year = str(response['values'][0][1])
     pre_prams = str(response['values'][0][2])
-    price = str(response['values'][0][3])
+    price_round = ("%.2f" % round(response['values'][0][3],2))
+    price = str(price_round +"GHS")
 
     return jsonify(month=month,year=year,pre_prams=pre_prams,price=price)
 
