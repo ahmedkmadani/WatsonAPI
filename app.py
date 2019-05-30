@@ -33,8 +33,9 @@ def getPrice():
     print(json.loads(response_scoring.text)) 
     response = json.loads(response_scoring.text)
 
-    # #get result from the response 
-    month = calendar.month_name[str(response['values'][0][0])]
+    #get result from the response 
+    month_num = int(response['values'][0][0])
+    month = calendar.month_name[month_num]
     year = str(response['values'][0][1])
     pre_prams = str(response['values'][0][2])
     price_round = ("%.2f" % round(response['values'][0][3],2))
@@ -60,9 +61,11 @@ def getPriceV2():
     response = json.loads(response_scoring.text)
 
     #get result from the response 
-    month = str(response['values'][0][0])
+    month_num = int(response['values'][0][0])
+    month = calendar.month_name[month_num]
     year = str(response['values'][0][1])
     pre_prams = str(response['values'][0][2])
-    price = str(response['values'][0][3])
+    price_round = ("%.2f" % round(response['values'][0][3],2))
+    price = str(price_round + " GHS")
 
     return jsonify(month=month,year=year,pre_prams=pre_prams,price=price)
