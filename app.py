@@ -90,11 +90,12 @@ def getPriceV3():
     year = int(response['values'][0][0])
     month_num = int(response['values'][0][1])
     month = calendar.month_name[month_num]
+    crop = int(response['values'][0][2])
     price_round = ("%.2f" % round(response['values'][0][4]))
     price = str(price_round + " GHS")
 
     # return str(response)
-    return jsonify(month=month,year=year,price=price)
+    return jsonify(month=month,year=year,price=price,crop=crop)
 
 if __name__ == '__main__':
     app.secret_key='secret123'
