@@ -69,3 +69,33 @@ def getPriceV2():
     price = str(price_round + " GHS")
 
     return jsonify(month=month,year=year,pre_prams=pre_prams,price=price)
+
+
+
+@app.route('/price/v3', methods=['GET', 'POST'])
+def getPriceV3():
+    #getting crop , month and year from POST request
+    month = request.args.get('month')
+    year = request.args.get('year')
+    crop = request.args.get('crop')
+
+
+    payload_scoring = {"fields":["YEAR","MONTH","CROP"],"values":[[int(year),int(month),int(crop)]]}
+    response_scoring = requests.post('https://eu-gb.ml.cloud.ibm.com/v3/wml_instances/6a216236-adcc-48b5-901f-41e4cafbf033/deployments/a4263b57-a6f0-4592-83ac-68f2625647f3/online', json=payload_scoring, headers=header)
+    print("Scoring response")
+    print(json.loads(response_scoring.text)) 
+    response = json.loads(response_scoring.text)
+
+    # get result from the response 
+    year = int(response['values'][0][0])
+    month_num = int(response['values'][0][1])
+    month = calendar.month_name[month_num]
+    price_round = ("%.2f" % round(response['values'][0][4]))
+    price = str(price_round + " GHS")
+
+    # return str(response)
+    return jsonify(month=month,year=year,price=price)
+
+if __name__ == '__main__':
+    app.secret_key='secret123'
+    app.run(debug=True)
